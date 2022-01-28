@@ -16,8 +16,8 @@ int main(int arc, char **argv) {
     customerRentals->getNumberRentals();
     std::cout << customerRentals->statement() << std::endl;
     customerDb.addCustomerRentals(*customerRentals);
-
-    MovieDB::SimpleUi ui{};
-    ui.drawUi();
+    
+//    MovieDB::SimpleUi ui{};
+//    ui.drawUi();
 
 }

@@ -1,0 +1,37 @@
+*** Settings ***
+Library     MovieLibrary.py
+
+*** Variables ***
+${REGULAR}      ${1}
+
+*** Test Cases ***
+Cutomer Rents Movie       
+    Add Customer    Sally
+    Add Movie Rental    Gone    ${2}
+    Add Customer Rental
+    Statement Should Be     Rental Record for Sally\n\tGone\t2\nAmount owed is 2\nYou earned 1 frequent renter points
+
+BDD Style Rental
+    Given Movie Matrix is available
+    When Bally Rents Matrix For ${2} Days
+    Then Statement Should Be    Rental Record for Bally\n\tMatrix\t2\nAmount owed is 2\nYou earned 1 frequent renter points
+
+*** Keywords ***
+Add Movie Rental  
+    [ARGUMENTS]		${MOVIE_NAME}   ${DAYS_RENTED}        
+    Add Movie       ${MOVIE_NAME} 
+    Add Rental      ${DAYS_RENTED}
+
+Statement Should Be
+    [ARGUMENTS]     ${STATEMENT}
+    ${RENTAL_STATEMENT}   Get Statement
+    Should Be Equal As Strings  ${RENTAL_STATEMENT}  ${STATEMENT} 
+
+Given Movie ${movie} is available
+    Add Movie   ${movie} 
+
+When ${customer_name} Rents ${movie} For ${days} Days
+    Add Rental  ${days}
+    Add Customer    ${customer_name}
+    Add Customer Rental
+    

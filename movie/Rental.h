@@ -21,7 +21,9 @@ public:
     friend std::istream & operator >> (std::istream &in,  Rental &o)
     {
         in >> o._movie;
-        in >> o._daysRented;
+        std::string daysRented;
+        std::getline(in, daysRented);
+        o._daysRented = std::stoi(daysRented);
         return in;
     }
 

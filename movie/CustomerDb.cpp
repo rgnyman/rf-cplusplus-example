@@ -34,6 +34,10 @@ void CustomerDb::readCustomerDb() {
 }
 
 CustomerDb::~CustomerDb() {
+
+}
+
+void CustomerDb::store() {
     std::ofstream myfile;
     myfile.open("customers.txt");
     if (myfile.is_open()) {

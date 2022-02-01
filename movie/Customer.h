@@ -33,13 +33,16 @@ public:
 
     friend std::istream & operator >> (std::istream &in,  Customer &o)
     {
-        in >> o._name;
-        int numberofRentals;
-        in >> numberofRentals;
-        for (int i = 0; i < numberofRentals; i++) {
-            Rental r(Movie(), 0);
-            in >> r;
-            o._rentals.push_back(r);
+        std::getline(in, o._name);
+        std::string rentals;
+        std::getline(in, rentals);
+        if (rentals.length() > 0) {
+            int nrRentals = std::stoi(rentals);
+            for (int i = 0; i < nrRentals; i++) {
+                Rental r(Movie(), 0);
+                in >> r;
+                o._rentals.push_back(r);
+            }
         }
         return in;
     }

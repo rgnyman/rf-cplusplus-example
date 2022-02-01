@@ -20,12 +20,13 @@ public:
 
     virtual std::map<std::string, Customer> getCustomers();
 
+    virtual void store();
+
 protected:
     CustomerDb();
     virtual void readCustomerDb();
 
     std::map<std::string, Customer> customers;
-
 };
 
 }
